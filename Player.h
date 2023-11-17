@@ -16,10 +16,10 @@ class Player {
     Item itemInHands;
 
 public:
-    void storeToInventory(Item item, int place);
+    void storeToInventory(int place);
     void takeItem(Item item);
-    void takeFromInventory(Item item);
-    Item* checkInventory();
+    void takeFromInventory(int place);
+    Item checkInventory();
     Item checkHands();
 };
 

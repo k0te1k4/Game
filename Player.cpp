@@ -8,18 +8,17 @@
 
 void Player::takeItem(Item item) {
     if(itemInHands.getName() == "none"){
-        itemInHands = std::move(item);
+        itemInHands = item;
     }
     else{
         cout << "hands zanyati"<< endl;
     }
 }
 
-void Player::storeToInventory(Item item,int place) {
+void Player::storeToInventory(int place) {
 
     if(itemInHands.getName() != "none"){
-
-        inventory[place] = std::move(item);
+        inventory[place] = itemInHands  ;
         itemInHands.deleteItem();
     }
     else{
@@ -27,12 +26,12 @@ void Player::storeToInventory(Item item,int place) {
     }
 }
 
-Item *Player::checkInventory() {
+Item Player::checkInventory() {
     cout << "Inventory:" << endl;
     for(Item it : inventory){
-        cout<< "- " << it.getName() << endl;
+        cout<< "- " << it.getName() << " " <<  it.getCoords().first << " " << it.getCoords().second << endl;
     }
-    return inventory;
+    return *inventory;
 }
 
 Item Player::checkHands() {
@@ -40,4 +39,12 @@ Item Player::checkHands() {
     cout << itemInHands.getName() << endl;
     return itemInHands;
 }
+
+void Player::takeFromInventory(int place) {
+    if(inventory[place].getName() != "none" && itemInHands.getName() == "none"){
+        itemInHands = inventory[place];
+        inventory[place].deleteItem();
+    }
+}
+
 
